@@ -12,7 +12,7 @@ if ENV == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = ''
 else:
     app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://jnztgtduagkkeg:23ae23b5fc4fa8646489302f341d08af6380ca4c22b9d2a2e4e382e0eff36a70@ec2-54-159-112-44.compute-1.amazonaws.com:5432/dbuj69j3s984fn'
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://qnhhvwecmohebn:20d4d9ca371452624bf721be3991f0b4dbc8122e6a1413cc1932b7b894fccfe2@ec2-52-202-146-43.compute-1.amazonaws.com:5432/d6s315r3ci1224"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -26,7 +26,7 @@ class Recruits(db.Model):
     personality = db.Column(db.String(200))
 
     def __init__(self, name, personality):
-        self.customer = customer
+        self.name = name
         self.personality = personality
 
 @app.route('/recruits', methods= ['GET'])
