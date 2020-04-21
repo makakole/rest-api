@@ -1,6 +1,7 @@
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask import jsonify
+import json
 
 
 app = Flask(__name__)
@@ -11,7 +12,7 @@ if ENV == 'dev':
     app.debug = True
     app.config['SQLALCHEMY_DATABASE_URI'] = ''
 else:
-    app.debug = False
+    app.debug = True
     app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://qnhhvwecmohebn:20d4d9ca371452624bf721be3991f0b4dbc8122e6a1413cc1932b7b894fccfe2@ec2-52-202-146-43.compute-1.amazonaws.com:5432/d6s315r3ci1224"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -32,8 +33,11 @@ class Recruits(db.Model):
 @app.route('/recruits', methods= ['GET'])
 def home():
     recruits = Recruits.query.all()
+    results = {}
+    for rec in recruits:
+        results.update({"name": rec.name, "personality": rec.personality})
 
-    return jsonify(recruits)
+    return results
 
 
 
